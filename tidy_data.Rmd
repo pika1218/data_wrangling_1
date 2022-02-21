@@ -27,7 +27,7 @@ Pulse_data_tidy =
     bdi_score_bl:bdi_score_12m,
     names_to = "visit",
     names_prefix = "bdi_score_",
-    values_to = "bdi",
+    values_to = "bdi"
     )
 ```
 
@@ -45,6 +45,23 @@ pulse_data =
     values_to = "bdi"
   ) %>% 
   relocate(id, visit) %>% 
-  mutate(visit = recode(visit, "bl" = "00m"))
-```
+  mutate(visit = recode(visit, "bl" = "00m")) 
 
+```
+##  `pivot_wider`
+
+Make up some data!
+```{r}
+analysis_result = 
+  tibble(
+    group = c("treatment", "treatment", "placebo", "placebo"),
+    time = c("pre", "post", "pre", "post"),
+    mean = c(4, 8, 3.5, 4)
+  )
+
+analysis_result %>% 
+  pivot_wider(
+    names_from  = "time", 
+    values_from = "mean"   
+  )
+```
